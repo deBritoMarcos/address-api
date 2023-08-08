@@ -1,66 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## 🚀 Sobre o projeto
+Em Breve ...
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## ⚙️ Configurando do projeto
 
-## About Laravel
+Este guia irá lhe ajudar na configuração do projeto localmente. Siga os passos abaixo para começar:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Passo 1: Copiar os arquivos de ambiente
+Copie os arquivos `.env.example` e `.env.testing.example`.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```bash
+cp .env.example .env && cp .env.testing.example .env.testing
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Passo 2: Adicionar as variáveis de ambiente
+Adicione as variáveis de ambiente `WWWUSER` e `WWWGROUP` em um dos seguintes arquivos:
+* bashrc
+* zshrc
+* bash_profile
 
-## Learning Laravel
+Você conseguirá adicionar as variáveis em questão incluindo as linhas a seguir ao arquivo escolhido:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+export WWWUSER=$(id -u)
+export WWWGROUP=$(id -g)
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Depois de salvar e fechar o arquivo precisará fazer um refresh nele com o seguinte comando:
+```bash
+source ~/.{bashrc, zshrc, bash_profile}
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Passo 3: Instale o composer
+Execute o comando abaixo para iniciar o processo de instalação de todas as dependencias:
 
-## Laravel Sponsors
+```bash
+docker compose run composer install --ignore-platform-reqs
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Passo 4: Suba os containers do projeto
+O projeto utiliza o [Laravel Sail](https://laravel.com/docs/10.x/sail), uma interface de linha de comando para interagir com o ambiente de desenvolvimento Docker padrão do Laravel.
 
-### Premium Partners
+Execute o comando abaixo para subir os containers do projeto:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+vendor/bin/sail up -d app
+```
 
-## Contributing
+**DICA**: Caso ainda não possua, é possível configurar um *shell alias* para facilmente executar os comandos do Sail. Para isso, adicione as seguintes linhas em algum de seus arquivos de configuração shell (`~/.bashrc`, `~/.zshrc`, ou `~/.bash_profile`):
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+```
 
-## Code of Conduct
+Com isso você podera levantar os container ou rodar qualquer comando usando somente o `sail`:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+sail up -d app
+```
 
-## Security Vulnerabilities
+## Passo 4: Gerar as chaves para os arquivos de ambiente
+Execute o comando para gerar as chaves para os arquivos `.env` e `.env.testing`:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+sail artisan key:generate && sail artisan key:generate --env=testing
+```
 
-## License
+## ▶️ Executando os testes
+A aplicação possui dois níveis de testes: **unit** e **feature**. Foram criadas dois tipos de suit de testes, sendo elas:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Formata todo o código seguindo o padrão configurado no [Pint](https://laravel.com/docs/10.x/pint#main-content), seguindo da execução dos testes.
+
+```bash
+sail composer test
+```
+
+- Executa somente os testes.
+
+```bash
+sail composer test:only
+```
+
+## 📝 Comandos uteis
+Em Breve ...
+
+## ➕ Contruibuição e Código de Conduta
+Em breve ....
