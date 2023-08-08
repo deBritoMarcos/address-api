@@ -1,6 +1,7 @@
 version: '3'
+
 services:
-    laravel.test:
+    app:
         build:
             context: ./vendor/laravel/sail/runtimes/8.2
             dockerfile: Dockerfile
@@ -25,9 +26,7 @@ services:
         depends_on:
             - mysql
             - redis
-            - meilisearch
-            - mailpit
-            - selenium
+
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -52,6 +51,7 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+
     redis:
         image: 'redis:alpine'
         ports:
@@ -67,13 +67,26 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+
+    composer:
+        image: laravelsail/php82-composer:latest
+        container_name: composer
+        environment:
+            COMPOSER_CACHE_DIR: '/dev/null'
+        user: '${WWWUSER}:${WWWGROUP}'
+        working_dir: '/var/www/html'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        entrypoint: composer
+
 networks:
     sail:
         driver: bridge
+
 volumes:
     sail-mysql:
         driver: local
     sail-redis:
-        driver: local
-    sail-meilisearch:
         driver: local
