@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
+//Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
+
+Route::prefix('address')->name('address.')->group(function () {
+    Route::get('/{parameter}', Address\Get::class)->name('get');
+});
