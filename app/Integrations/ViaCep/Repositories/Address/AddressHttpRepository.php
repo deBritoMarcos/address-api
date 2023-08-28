@@ -18,7 +18,7 @@ class AddressHttpRepository implements AddressHttpRepositoryInterface
     public function findByCep(string $zipCode): AddressHttpOutputData
     {
         $response = $this->http
-            ->get('https://viacep.com.br/ws/' . $zipCode . '/json');
+            ->get($zipCode . '/json');
 
         return AddressHttpOutputData::fromJson($response->body());
     }

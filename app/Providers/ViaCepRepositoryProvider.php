@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Integrations\ViaCep\Repositories\Address\AddressHttpRepository;
 use App\Integrations\ViaCep\Repositories\Address\Contracts\AddressHttpRepositoryInterface;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 
 class ViaCepRepositoryProvider extends ServiceProvider
@@ -15,6 +16,11 @@ class ViaCepRepositoryProvider extends ServiceProvider
         $this->app->bind(
             AddressHttpRepositoryInterface::class,
             AddressHttpRepository::class
+        );
+
+        $this->app->bind(
+            AddressHttpRepositoryInterface::class,
+            fn () => new AddressHttpRepository(Http::viaCep()),
         );
     }
 }
