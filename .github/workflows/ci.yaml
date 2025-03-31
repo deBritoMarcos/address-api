@@ -31,5 +31,5 @@ jobs:
           
       - name: Run tests suit
         run: |
-          composer test
+          composer test:only
 
