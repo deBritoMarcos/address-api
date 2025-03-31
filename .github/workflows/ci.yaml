@@ -28,4 +28,9 @@ jobs:
       - name: Run Composer
         run: |
           composer install --no-interaction
+          
+
+      - name: Run tests suit
+        run: |
+          composer test:only
 
