@@ -53,7 +53,7 @@
         "test:only" : ["pest"],
         "test" : [
             "@test:lint",
-            "@test:unit"
+            "@test:only"
         ]
     },
     "extra": {
