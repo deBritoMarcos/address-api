@@ -12,7 +12,7 @@ return new class() extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->integer('zip_code');
+            $table->string('zip_code', length: 8);
             $table->string('address', length: 200);
             $table->string('complement', length: 200)->nullable();
             $table->string('district', length: 200)->nullable();
