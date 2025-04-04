@@ -17,7 +17,7 @@ class AddressHttpOutputData extends Data
         public ?string $address,
         public ?string $complement,
         public ?string $district,
-        public ?string $place,
+        public ?string $city,
         public ?string $uf,
         public ?string $ibge,
         public ?string $gia,
@@ -31,11 +31,11 @@ class AddressHttpOutputData extends Data
         $addressFormatted = Json::decode($address);
 
         return new self(
-            zipCode: $addressFormatted['cep'],
+            zipCode: str_replace('-', '', $addressFormatted['cep']),
             address: $addressFormatted['logradouro'],
             complement: $addressFormatted['complemento'],
             district: $addressFormatted['bairro'],
-            place: $addressFormatted['localidade'],
+            city: $addressFormatted['localidade'],
             uf: $addressFormatted['uf'],
             ibge: $addressFormatted['ibge'],
             gia: $addressFormatted['gia'],

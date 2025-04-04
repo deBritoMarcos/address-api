@@ -16,7 +16,7 @@ class AddressOutputData extends Data
         public ?string $address,
         public ?string $complement,
         public ?string $district,
-        public ?string $place,
+        public ?string $city,
         public ?string $uf,
     ) {
     }
@@ -28,8 +28,20 @@ class AddressOutputData extends Data
             address: $address['address'],
             complement: $address['complement'],
             district: $address['district'],
-            place: $address['place'],
+            city: $address['city'],
             uf: $address['uf'],
+        );
+    }
+
+    public static function fromViaCep(AddressHttpOutputData $address): self
+    {
+        return new self(
+            zipCode: $address->zipCode,
+            address: $address->address,
+            complement: $address->complement,
+            district: $address->district,
+            city: $address->city,
+            uf: $address->uf,
         );
     }
 }

@@ -8,5 +8,5 @@ use App\Integrations\ViaCep\DTO\Address\AddressHttpOutputData;
 
 interface AddressHttpRepositoryInterface
 {
-    public function findByCep(string $zipCode): AddressHttpOutputData;
+    public function find(string $zipCode): AddressHttpOutputData;
 }

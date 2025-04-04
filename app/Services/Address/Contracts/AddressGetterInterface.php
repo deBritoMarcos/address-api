@@ -6,7 +6,7 @@ namespace App\Services\Address\Contracts;
 
 use App\Integrations\ViaCep\DTO\Address\AddressOutputData;
 
-interface AddressFinderInterface
+interface AddressGetterInterface
 {
-    public function find(string $parameter): AddressOutputData;
+    public function findByZipCode(string $zipCode): AddressOutputData;
 }

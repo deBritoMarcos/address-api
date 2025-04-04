@@ -15,10 +15,10 @@ class AddressHttpRepository implements AddressHttpRepositoryInterface
     ) {
     }
 
-    public function findByCep(string $zipCode): AddressHttpOutputData
+    public function find(string $zipCode): AddressHttpOutputData
     {
         $response = $this->http
-            ->get($zipCode . '/json');
+            ->get("{$zipCode}/json");
 
         return AddressHttpOutputData::fromJson($response->body());
     }

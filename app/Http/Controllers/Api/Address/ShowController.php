@@ -6,19 +6,19 @@ namespace App\Http\Controllers\Api\Address;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Address\AddressResource;
-use App\Services\Address\Contracts\AddressFinderInterface;
+use App\Services\Address\Contracts\AddressGetterInterface;
 use Illuminate\Http\JsonResponse;
 
-class Get extends Controller
+class ShowController extends Controller
 {
     public function __construct(
-        readonly private AddressFinderInterface $addressFinder,
+        readonly private AddressGetterInterface $addressGetterService,
     ) {
     }
 
-    public function __invoke(string $data): JsonResponse
+    public function __invoke(string $zipCode): JsonResponse
     {
-        $address = $this->addressFinder->find($data);
+        $address = $this->addressGetterService->findByZipCode($zipCode);
 
         return (new AddressResource($address))
             ->response()

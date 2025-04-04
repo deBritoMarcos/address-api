@@ -171,6 +171,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HttpServiceProvider::class,
+        App\Providers\EloquentRepositoryProvider::class,
         App\Providers\ViaCepRepositoryProvider::class,
     ])->toArray(),
 
