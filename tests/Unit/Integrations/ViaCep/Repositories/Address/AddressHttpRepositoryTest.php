@@ -27,7 +27,7 @@ it('sends with the expected zip code', function () {
     ]);
 
     app()->make(AddressHttpRepositoryInterface::class, [$http])
-        ->findByCep('96010330');
+        ->find('96010330');
 
     Http::assertSent(function (Request $request) {
         return $request->url() === route('http-test.viacep', ['96010330'])
@@ -44,7 +44,7 @@ it('returns address data', function () {
     ]);
 
     app()->make(AddressHttpRepositoryInterface::class, [$http])
-        ->findByCep('96010330');
+        ->find('96010330');
 
     $recorded = Http::recorded(fn (Request $request, ClientResponse $response) => $response->successful());
 

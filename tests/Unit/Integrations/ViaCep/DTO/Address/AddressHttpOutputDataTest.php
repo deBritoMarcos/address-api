@@ -13,7 +13,7 @@ it('creates the http output address data', function () {
         address: $addressHttpOutput['logradouro'],
         complement: $addressHttpOutput['complemento'],
         district: $addressHttpOutput['bairro'],
-        place: $addressHttpOutput['localidade'],
+        city: $addressHttpOutput['localidade'],
         uf: $addressHttpOutput['uf'],
         ibge: $addressHttpOutput['ibge'],
         gia: $addressHttpOutput['gia'],
@@ -23,18 +23,18 @@ it('creates the http output address data', function () {
 
     expect($addressDTO->toArray())
         ->toBe([
-            'zip_code' => '::cep::',
+            'zip_code' => '99010-220',
             'address' => '::logradouro::',
             'complement' => '::complemento::',
             'district' => '::bairro::',
-            'place' => '::localidade::',
+            'city' => '::localidade::',
             'uf' => '::uf::',
             'ibge' => '::ibge::',
             'gia' => '::gia::',
             'ddd' => '::ddd::',
             'siafi' => '::siafi::',
         ]);
-});
+})->only();
 
 it('creates the http output address data from json payload', function () {
     $addressHttpOutput = Json::encode(dataset_get('data.integrations.via-cep.address-http.output'));
@@ -43,11 +43,11 @@ it('creates the http output address data from json payload', function () {
 
     expect($addressDTO->toArray())
         ->toBe([
-            'zip_code' => '::cep::',
+            'zip_code' => '99010220',
             'address' => '::logradouro::',
             'complement' => '::complemento::',
             'district' => '::bairro::',
-            'place' => '::localidade::',
+            'city' => '::localidade::',
             'uf' => '::uf::',
             'ibge' => '::ibge::',
             'gia' => '::gia::',
