@@ -1,9 +1,11 @@
 ## 🚀 Sobre o projeto
-Em Breve ...
+Foi desenvolvido um protótipo de um serviço responsável por servir de buscador de endereços reais do Brasil. Inicialmente foi realizado a integração com a api publica ViaCep para pegar os endereços e serem armazenados em uma base de dados local.
+
+<img src="./public/images/fluxo.png" alt="Arquitetura do serviço">
 
 ## ⚙️ Configurando do projeto
 
-Este guia irá lhe ajudar na configuração do projeto localmente. Siga os passos abaixo para começar:
+O projeto foi realizado para ser instalado somente utilizando *Sail* sem ter necessariamente o PHP e o Composer instalado no ambiente:
 
 ### Passo 1: Copiar os arquivos de ambiente
 Copie os arquivos `.env.example` e `.env.testing.example`.
@@ -38,7 +40,7 @@ docker compose run composer install --ignore-platform-reqs
 ```
 
 ### Passo 4: Suba os containers do projeto
-O projeto utiliza o [Laravel Sail](https://laravel.com/docs/10.x/sail), uma interface de linha de comando para interagir com o ambiente de desenvolvimento Docker padrão do Laravel.
+O projeto utiliza o [Laravel Sail 10.X](https://laravel.com/docs/10.x/sail), uma interface de linha de comando para interagir com o ambiente de desenvolvimento Docker padrão do Laravel.
 
 Execute o comando abaixo para subir os containers do projeto:
 
@@ -79,9 +81,3 @@ sail composer test
 ```bash
 sail composer test:only
 ```
-
-## 📝 Comandos uteis
-Em Breve ...
-
-## ➕ Contruibuição e Código de Conduta
-Em breve ....
