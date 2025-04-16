@@ -34,7 +34,7 @@ it('creates the http output address data', function () {
             'ddd' => '::ddd::',
             'siafi' => '::siafi::',
         ]);
-})->only();
+});
 
 it('creates the http output address data from json payload', function () {
     $addressHttpOutput = Json::encode(dataset_get('data.integrations.via-cep.address-http.output'));
