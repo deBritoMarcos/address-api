@@ -16,7 +16,7 @@ class AddressResource extends JsonResource
             'address' => $this->address,
             'complement' => $this->complement,
             'district' => $this->district,
-            'place' => $this->place,
+            'city' => $this->city,
             'uf' => $this->uf
         ];
     }

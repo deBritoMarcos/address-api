@@ -19,6 +19,6 @@ use Illuminate\Support\Facades\Route;
 
 //Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
 
-Route::prefix('address')->name('address.')->group(function () {
-    Route::get('/{zipcode}', Address\ShowController::class)->name('get');
+Route::prefix('/address')->name('address.')->group(function () {
+    Route::get('/{zipcode}', Address\ShowController::class)->name('show');
 });
